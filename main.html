@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل عالم أسامة المسلم</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:       #0b0b0f;
+  --surface:  #13131a;
+  --border:   rgba(255,255,255,0.07);
+  --gold:     #c9a84c;
+  --gold2:    #e8c96a;
+  --red:      #c0392b;
+  --red2:     #e74c3c;
+  --blue:     #2e86ab;
+  --blue2:    #5ab4d6;
+  --green:    #27ae60;
+  --green2:   #2ecc71;
+  --purple:   #8e44ad;
+  --purple2:  #a569bd;
+  --muted:    rgba(255,255,255,0.45);
+  --text:     rgba(255,255,255,0.88);
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── noise texture overlay ── */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:999;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 70px 20px 50px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(192,57,43,0.08) 0%, transparent 60%);
+}
+
+.hero-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(201,168,76,0.3);
+  margin-bottom: 6px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold2);
+}
+
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 14px;
+  max-width: 500px;
+  margin-inline: auto;
+  line-height: 1.8;
+}
+
+/* world note */
+.world-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 680px;
+  margin: 32px auto 0;
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: right;
+}
+
+.world-note-icon { font-size: 1.6rem; flex-shrink:0; margin-top:2px; }
+
+.world-note-text {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.75);
+}
+
+.world-note-text strong { color: var(--gold2); }
+
+/* ══════════════════════════════════════
+   WHERE TO START
+══════════════════════════════════════ */
+.section {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 50px 20px 20px;
+}
+
+.section-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink:0;
+}
+
+.section-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+  padding-right: 20px;
+}
+
+/* start paths */
+.paths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 50px;
+}
+
+.path-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.path-card:hover { transform: translateY(-3px); }
+
+.path-card::before {
+  content:'';
+  position:absolute; top:0; right:0; left:0; height:3px;
+  border-radius: 14px 14px 0 0;
+}
+
+.path-card.beginner::before  { background: linear-gradient(90deg, var(--green), var(--green2)); }
+.path-card.beginner { border-color: rgba(39,174,96,0.25); }
+.path-card.beginner:hover { border-color: rgba(39,174,96,0.5); }
+
+.path-card.horror::before    { background: linear-gradient(90deg, var(--red), var(--red2)); }
+.path-card.horror { border-color: rgba(192,57,43,0.25); }
+.path-card.horror:hover { border-color: rgba(192,57,43,0.5); }
+
+.path-card.epic::before      { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+.path-card.epic { border-color: rgba(201,168,76,0.25); }
+.path-card.epic:hover { border-color: rgba(201,168,76,0.5); }
+
+.path-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.beginner .path-badge  { background: rgba(39,174,96,0.15);  color: var(--green2);  }
+.horror   .path-badge  { background: rgba(192,57,43,0.15);  color: var(--red2);    }
+.epic     .path-badge  { background: rgba(201,168,76,0.15); color: var(--gold2);   }
+
+.path-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.path-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.path-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.path-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+}
+
+.step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.beginner .step-num  { background: rgba(39,174,96,0.2);  color: var(--green2); }
+.horror   .step-num  { background: rgba(192,57,43,0.2);  color: var(--red2);   }
+.epic     .step-num  { background: rgba(201,168,76,0.2); color: var(--gold2);  }
+
+/* ══════════════════════════════════════
+   UNIVERSE MAP  (the big section)
+══════════════════════════════════════ */
+.universe {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.universe-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 6px;
+  display: flex; align-items:center; gap:12px;
+}
+
+.universe-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+  padding-right: 20px;
+}
+
+/* ─── نصائح وإضاءات مهمة ─── */
+.insights-box {
+  background: rgba(46,134,171,0.08);
+  border: 1px solid rgba(46,134,171,0.25);
+  border-right: 5px solid var(--gold);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+
+.insights-box .insight-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.2rem;
+  color: var(--gold2);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.insights-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.insights-box ul li {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.insights-box ul li .icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.insights-box ul li strong {
+  color: #fff;
+}
+
+.insights-box ul li .highlight {
+  color: var(--gold2);
+  font-weight: 700;
+}
+
+/* series block */
+.series-block {
+  margin-bottom: 36px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.series-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--surface);
+  transition: background 0.2s;
+}
+
+.series-header:hover { background: rgba(255,255,255,0.04); }
+
+.series-stripe {
+  width: 4px;
+  border-radius: 4px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.series-meta { flex:1; }
+
+.series-name {
+  font-family: 'Amiri', serif;
+  font-size: 1.25rem;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.series-tag {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.series-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+.series-chevron {
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: transform 0.3s;
+  flex-shrink:0;
+}
+
+.series-block.open .series-chevron { transform: rotate(180deg); }
+
+.series-body {
+  display: none;
+  border-top: 1px solid var(--border);
+}
+
+.series-block.open .series-body { display: block; }
+
+/* reading note inside block */
+.reading-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 22px 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.reading-note.ordered {
+  background: rgba(192,57,43,0.08);
+  border: 1px solid rgba(192,57,43,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.reading-note.free {
+  background: rgba(39,174,96,0.08);
+  border: 1px solid rgba(39,174,96,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.reading-note.caution {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.reading-note strong { color: #fff; }
+
+/* books list */
+.books-list {
+  padding: 16px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.book-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
+.book-row:hover {
+  background: rgba(255,255,255,0.055);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.book-num {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 0.72rem;
+  font-weight: 900;
+  flex-shrink:0;
+  margin-top: 1px;
+}
+
+.book-info { flex:1; }
+
+.book-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.book-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.6;
+}
+
+.book-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.tag {
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.connection {
+  font-size: 0.65rem;
+  padding: 3px 9px;
+  border-radius: 8px;
+  flex-shrink:0;
+  margin-top:2px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── color schemes per series ── */
+/* خوف — red */
+.s-red .series-stripe  { background: linear-gradient(180deg,var(--red),var(--red2)); }
+.s-red .series-name    { color: var(--red2); }
+.s-red .book-num       { background: rgba(192,57,43,0.2); color: var(--red2); }
+.s-red .pill           { background: rgba(192,57,43,0.12); color: var(--red2); border-color: rgba(192,57,43,0.3); }
+
+/* بساتين — gold */
+.s-gold .series-stripe { background: linear-gradient(180deg,var(--gold),var(--gold2)); }
+.s-gold .series-name   { color: var(--gold2); }
+.s-gold .book-num      { background: rgba(201,168,76,0.2); color: var(--gold2); }
+.s-gold .pill          { background: rgba(201,168,76,0.12); color: var(--gold2); border-color: rgba(201,168,76,0.3); }
+
+/* لج — blue */
+.s-blue .series-stripe { background: linear-gradient(180deg,var(--blue),var(--blue2)); }
+.s-blue .series-name   { color: var(--blue2); }
+.s-blue .book-num      { background: rgba(46,134,171,0.2); color: var(--blue2); }
+.s-blue .pill          { background: rgba(46,134,171,0.12); color: var(--blue2); border-color: rgba(46,134,171,0.3); }
+
+/* خماسية — green */
+.s-green .series-stripe { background: linear-gradient(180deg,var(--green),var(--green2)); }
+.s-green .series-name   { color: var(--green2); }
+.s-green .book-num      { background: rgba(39,174,96,0.2); color: var(--green2); }
+.s-green .pill          { background: rgba(39,174,96,0.12); color: var(--green2); border-color: rgba(39,174,96,0.3); }
+
+/* purple */
+.s-purple .series-stripe { background: linear-gradient(180deg,var(--purple),var(--purple2)); }
+.s-purple .series-name   { color: var(--purple2); }
+.s-purple .book-num      { background: rgba(142,68,173,0.2); color: var(--purple2); }
+.s-purple .pill          { background: rgba(142,68,173,0.12); color: var(--purple2); border-color: rgba(142,68,173,0.3); }
+
+/* white (standalone) */
+.s-white .series-stripe { background: linear-gradient(180deg,#aaa,#fff); }
+.s-white .series-name   { color: #eee; }
+.s-white .book-num      { background: rgba(255,255,255,0.1); color: #ccc; }
+.s-white .pill          { background: rgba(255,255,255,0.07); color: #aaa; border-color: rgba(255,255,255,0.15); }
+
+/* connections */
+.conn-gold   { background: rgba(201,168,76,0.1); color: var(--gold2); border-color: rgba(201,168,76,0.3); }
+.conn-red    { background: rgba(192,57,43,0.1);  color: var(--red2);  border-color: rgba(192,57,43,0.3); }
+.conn-blue   { background: rgba(46,134,171,0.1); color: var(--blue2); border-color: rgba(46,134,171,0.3); }
+.conn-green  { background: rgba(39,174,96,0.1);  color: var(--green2);border-color: rgba(39,174,96,0.3); }
+
+/* ══════════════════════════════════════
+   YOUR PROGRESS (tracker)
+══════════════════════════════════════ */
+.tracker {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px 70px;
+}
+
+.tracker-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 6px;
+  display: flex; align-items:center; gap:12px;
+}
+
+.tracker-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-right: 20px;
+}
+
+.tracker-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tracker-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.tracker-row:hover { background: rgba(255,255,255,0.04); }
+
+.tracker-row.done {
+  border-color: rgba(39,174,96,0.3);
+  background: rgba(39,174,96,0.05);
+}
+
+.check {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items:center; justify-content:center;
+  font-size: 0.75rem;
+  flex-shrink:0;
+  transition: all 0.2s;
+}
+
+.tracker-row.done .check {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.tracker-book { font-size: 0.88rem; font-weight: 600; flex:1; }
+.tracker-series { font-size: 0.72rem; color: var(--muted); }
+
+.tracker-row.done .tracker-book { color: rgba(255,255,255,0.5); text-decoration: line-through; }
+
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  height: 6px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--green2));
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+.progress-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 520px) {
+  .paths-grid { grid-template-columns: 1fr; }
+  .series-header { padding: 14px 16px; }
+  .books-list { padding: 12px 16px 16px; }
+  .reading-note { margin: 12px 16px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<div class="hero">
+  <div class="hero-label">✦ دليل القراءة الكامل ✦</div>
+  <h1>عالم <em>أسامة المسلم</em></h1>
+  <p class="hero-sub">كل رواياته في كون واحد — الشخصيات والأحداث تتشابك — لكن كل كتاب يُقرأ وحده</p>
+  <div class="world-note">
+    <div class="world-note-icon">🌐</div>
+    <div class="world-note-text">
+      <strong>الفكرة الجوهرية:</strong> أسامة المسلم بنى عالماً واحداً موحداً يربط كل أعماله. ستجد شخصية ذُكرت في رواية تظهر في أخرى، وحدثاً أُشير إليه يكشف تفاصيله في كتاب مختلف. لست <em>مجبراً</em> تقرأ بترتيب — لكن كلما قرأت أكثر، كلما اتسع فهمك للعالم.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ WHERE TO START ═══════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span> من أين تبدأ؟</div>
+  <p class="section-desc">اختر المسار حسب ذوقك — كل مسار يأخذك لنقطة انطلاق مختلفة في العالم</p>
+
+  <div class="paths-grid">
+
+    <div class="path-card beginner">
+      <div class="path-badge">🌱 المبتدئ الجديد</div>
+      <div class="path-title">ما قرأت له شيء؟ ابدأ هنا</div>
+      <div class="path-desc">الخماسية القديمة هي أفضل مدخل — كتب قصيرة، جو رعب خفيف، وتعرفك على أسلوبه بدون التزام كبير.</div>
+      <ul class="path-steps">
+        <li><span class="step-num">١</span> أي كتاب من الخماسية القديمة</li>
+        <li><span class="step-num">٢</span> باقي الخماسية القديمة</li>
+        <li><span class="step-num">٣</span> خوف (الجزء الأول)</li>
+        <li><span class="step-num">٤</span> بساتين عربستان</li>
+      </ul>
+    </div>
+
+    <div class="path-card horror">
+      <div class="path-badge">🩸 عاشق الرعب</div>
+      <div class="path-title">تحب الجو الثقيل والمرعب؟</div>
+      <div class="path-desc">ابدأ مباشرة بخوف — أشهر رواياته وأكثرها رعباً. ثلاثية كاملة تأخذك في رحلة مظلمة.</div>
+      <ul class="path-steps">
+        <li><span class="step-num">١</span> خوف — الجزء الأول</li>
+        <li><span class="step-num">٢</span> خوف — الجزء الثاني</li>
+        <li><span class="step-num">٣</span> خوف — الجزء الثالث</li>
+        <li><span class="step-num">٤</span> الخماسية القديمة</li>
+      </ul>
+    </div>
+
+    <div class="path-card epic">
+      <div class="path-badge">⚔️ عاشق الملاحم</div>
+      <div class="path-title">تريد العالم الأضخم والأعمق؟</div>
+      <div class="path-desc">بساتين عربستان هي أكبر ملحمة كتبها — ستة أجزاء، تُرجمت لأكثر من لغة، وتحولت لمسلسل.</div>
+      <ul class="path-steps">
+        <li><span class="step-num">١</span> بساتين عربستان (ج١)</li>
+        <li><span class="step-num">٢</span> عصبة الشياطين (ج٢)</li>
+        <li><span class="step-num">٣</span> باقي الأجزاء بالترتيب</li>
+        <li><span class="step-num">٤</span> الدوائر الخمس (بعدها مباشرة)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ UNIVERSE MAP ═══════════════════════════════ -->
+<div class="universe">
+  <div class="universe-title"><span class="dot"></span> خريطة الكون الكاملة</div>
+  <p class="universe-desc">اضغط على أي سلسلة لترى كتبها وكيف تتصل بغيرها</p>
+
+  <!-- ─── نصائح وإضاءات مهمة ─── -->
+  <div class="insights-box">
+    <div class="insight-title">💡 نصائح وإضاءات مهمة (لتفادي التوهان)</div>
+    <ul>
+      <li>
+        <span class="icon">🔗</span>
+        <span><strong>رابط "هذا ما حدث معها" و"ليلة ماطرة":</strong> ليست رواية مستقلة تماماً، بل هي <span class="highlight">امتداد لأحداث "ليلة ماطرة" من منظور هاجر</span>. اقرأ "ليلة ماطرة" أولاً ثم "هذا ما حدث معها" لفهم الصورة الكاملة.</span>
+      </li>
+      <li>
+        <span class="icon">🕵️</span>
+        <span><strong>المحقق نادر:</strong> شخصية جسرية تظهر في <span class="highlight">٤-٥ كتب</span> (شبكة العنكبوت، النداء، الانتهازي، هذا ما حدث معي، هذا ما حدث معها). انتبه لظهوره — هو مفتاح ربط خفي بين أعمال متفرقة.</span>
+      </li>
+      <li>
+        <span class="icon">📝</span>
+        <span><strong>صخب الخسيف:</strong> ليست رواية واحدة طويلة، بل <span class="highlight">مجموعة قصصية</span> (قصص قصيرة) داخل كل جزء. لا تنتظر قصة واحدة ممتدة — كل قصة لها عالمها، لكن هناك رابط خفيف جداً مع "سعد الدباس".</span>
+      </li>
+      <li>
+        <span class="icon">📚</span>
+        <span><strong>الخماسية الجديدة:</strong> "ليلة ماطرة، النداء، الغيهب، الوليمة، الانتهازي" جزء من سلسلة واحدة. لكن <span class="highlight">"هذا ما حدث معها" ليست جزءاً منها</span> — هي رواية مستقلة تكمل منظورها فقط.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── خوف ── -->
+  <div class="series-block s-red open" id="block-khawf">
+    <div class="series-header" onclick="toggle('block-khawf')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">ثلاثية خوف</div>
+        <div class="series-tag">٣ أجزاء · ترتيب إلزامي · رعب وغموض</div>
+        <div class="series-pills">
+          <span class="pill">يُقرأ بالترتيب</span>
+          <span class="pill">🩸 رعب</span>
+          <span class="pill">2015 ← 2021</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note ordered">
+        <span>🔴</span>
+        <span><strong>مهم:</strong> يُقرأ بالترتيب حتماً — كل جزء يبني على السابق ويكشف أسراراً جديدة. لا تبدأ بالجزء الثاني دون الأول.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">١</div>
+          <div class="book-info">
+            <div class="book-title">خوف</div>
+            <div class="book-sub">الجزء الأول · 2015 · نقطة الانطلاق الكبرى — أشهر رواياته وأكثرها مبيعاً في الخليج</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">جن</span><span class="tag">غموض</span></div>
+          </div>
+          <div class="connection conn-green">⭐ ابدأ هنا</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٢</div>
+          <div class="book-info">
+            <div class="book-title">خوف ٢</div>
+            <div class="book-sub">الجزء الثاني · 2018 · تتعمق الأسرار وتتصاعد الأحداث</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">تشويق</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٣</div>
+          <div class="book-info">
+            <div class="book-title">خوف ٣</div>
+            <div class="book-sub">الجزء الثالث · 2021 · الخاتمة — جاري تحويلها لمسلسل سعودي</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">خاتمة</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── بساتين عربستان ── -->
+  <div class="series-block s-gold" id="block-basatin">
+    <div class="series-header" onclick="toggle('block-basatin')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">بساتين عربستان</div>
+        <div class="series-tag">٦ أجزاء · ترتيب إلزامي · فانتازيا ملحمية</div>
+        <div class="series-pills">
+          <span class="pill">يُقرأ بالترتيب</span>
+          <span class="pill">⚔️ ملحمة</span>
+          <span class="pill">مُترجمة للإنجليزية والصينية</span>
+          <span class="pill">مسلسل MBC 2022</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note ordered">
+        <span>🔴</span>
+        <span><strong>يُقرأ بالترتيب حتماً.</strong> هذه الملحمة الأضخم في أعماله — بعد إنهائها مباشرة اقرأ <strong>الدوائر الخمس</strong> لأنها تكمل أحداثها وتتوسع في شخصية ظهرت فيها.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">١</div>
+          <div class="book-info">
+            <div class="book-title">بساتين عربستان</div>
+            <div class="book-sub">الجزء الأول · 2015 · بداية الملحمة في عالم مستوحى من التراث العربي</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span><span class="tag">تراث عربي</span><span class="tag">أساطير</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٢</div>
+          <div class="book-info">
+            <div class="book-title">عصبة الشياطين</div>
+            <div class="book-sub">الجزء الثاني · 2016 · تظهر عصبة الشياطين وتشتد المعركة</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span><span class="tag">شياطين</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٣</div>
+          <div class="book-info">
+            <div class="book-title">ريح هاجر</div>
+            <div class="book-sub">الجزء الثالث · 2017</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٤</div>
+          <div class="book-info">
+            <div class="book-title">العرجاء</div>
+            <div class="book-sub">الجزء الرابع · تتصاعد الأحداث وتتشابك المصائر</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٥</div>
+          <div class="book-info">
+            <div class="book-title">الساحرة الهجينة</div>
+            <div class="book-sub">الجزء الخامس · اقتراب الخاتمة الكبرى</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٦</div>
+          <div class="book-info">
+            <div class="book-title">عرين الأسد</div>
+            <div class="book-sub">الجزء السادس · الخاتمة — ثم اقرأ الدوائر الخمس مباشرة</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span><span class="tag">خاتمة</span></div>
+          </div>
+          <div class="connection conn-gold">← ثم الدوائر الخمس</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── الدوائر الخمس ── -->
+  <div class="series-block s-gold" id="block-dawaer">
+    <div class="series-header" onclick="toggle('block-dawaer')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">الدوائر الخمس</div>
+        <div class="series-tag">كتاب واحد · تابع لبساتين عربستان</div>
+        <div class="series-pills">
+          <span class="pill">⚠️ اقرأ بساتين أولاً</span>
+          <span class="pill">فانتازيا</span>
+          <span class="pill">توسعة للملحمة</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note caution">
+        <span>⚠️</span>
+        <span>هذا الكتاب <strong>ليس مستقلاً تماماً</strong> — هو توسعة لبساتين عربستان. يتوسع في شخصية "شيطان الهرم" التي ظهرت فيها بشكل غامض. ستفهمه لوحده، لكنه سيكون أقوى بكثير إذا أنهيت البساتين أولاً.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">◆</div>
+          <div class="book-info">
+            <div class="book-title">الدوائر الخمس</div>
+            <div class="book-sub">تبدو في البداية كقصص منفصلة، ثم تتشابك في دوائر خمس تتحرك معاً كوحدة واحدة — أسلوب سردي فريد جداً</div>
+            <div class="book-tags"><span class="tag">فانتازيا</span><span class="tag">غموض</span><span class="tag">سرد متداخل</span></div>
+          </div>
+          <div class="connection conn-gold">بعد البساتين</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── لج ── -->
+  <div class="series-block s-blue" id="block-luj">
+    <div class="series-header" onclick="toggle('block-luj')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">لج — ملحمة البحور السبعة</div>
+        <div class="series-tag">٥ أجزاء · ترتيب إلزامي · فانتازيا بحرية</div>
+        <div class="series-pills">
+          <span class="pill">يُقرأ بالترتيب</span>
+          <span class="pill">🌊 بحور وأساطير</span>
+          <span class="pill">مُستقلة عن البساتين</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note ordered">
+        <span>🔵</span>
+        <span><strong>يُقرأ بالترتيب.</strong> مستقلة سردياً عن بساتين عربستان — يمكنك البدء بها في أي وقت. تدور حول أميرة البحور السبعة "لج" وعالم البحار الخيالي.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">١</div>
+          <div class="book-info">
+            <div class="book-title">لج</div>
+            <div class="book-sub">2017 · البداية — أميرة البحور السبعة تسعى لحكم البحار بأي طريقة</div>
+            <div class="book-tags"><span class="tag">فانتازيا بحرية</span><span class="tag">أميرة</span><span class="tag">أساطير</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٢</div>
+          <div class="book-info">
+            <div class="book-title">ملكة الغرانيق</div>
+            <div class="book-sub">2018 · تتواصل الرحلة في أعماق البحور</div>
+            <div class="book-tags"><span class="tag">فانتازيا بحرية</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٣</div>
+          <div class="book-info">
+            <div class="book-title">ثورة الحور</div>
+            <div class="book-sub">قوى خفية لم يعرفها البشر من قبل</div>
+            <div class="book-tags"><span class="tag">فانتازيا بحرية</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٤</div>
+          <div class="book-info">
+            <div class="book-title">صراع الملكات</div>
+            <div class="book-sub">تتقاطع الخيوط وتتكشف حقائق كبرى</div>
+            <div class="book-tags"><span class="tag">فانتازيا بحرية</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٥</div>
+          <div class="book-info">
+            <div class="book-title">فجر السايرينات</div>
+            <div class="book-sub">الخاتمة — الملحمة البحرية الأضخم في الأدب العربي الحديث</div>
+            <div class="book-tags"><span class="tag">فانتازيا بحرية</span><span class="tag">خاتمة</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── الخماسية القديمة ── -->
+  <div class="series-block s-green" id="block-old5">
+    <div class="series-header" onclick="toggle('block-old5')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">الخماسية القديمة</div>
+        <div class="series-tag">٥ كتب قصيرة · بأي ترتيب · نفس العالم</div>
+        <div class="series-pills">
+          <span class="pill">✅ بأي ترتيب</span>
+          <span class="pill">📖 كتب قصيرة</span>
+          <span class="pill">🌱 نقطة دخول ممتازة</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note free">
+        <span>🟢</span>
+        <span><strong>اقرأها بأي ترتيب تريد.</strong> كل كتاب قصة مستقلة — لكنها كلها في نفس العالم. إذا قرأتها كلها ستلاحظ روابط خفية: شخصية تُذكر هنا، حدث يُشار إليه هناك. هذا هو سحر أسامة المسلم.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">أ</div>
+          <div class="book-info">
+            <div class="book-title">أجيج</div>
+            <div class="book-sub">شخصية "يُسرى" تُذكر لاحقاً في جحيم العابرين</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">غموض</span></div>
+          </div>
+          <div class="connection conn-green">يتصل بـ جحيم العابرين</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">ب</div>
+          <div class="book-info">
+            <div class="book-title">أرض القرابين</div>
+            <div class="book-sub">قصة الخروف تظهر هنا وفي سعد الدباس أيضاً</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">جن</span></div>
+          </div>
+          <div class="connection conn-green">يتصل بـ سعد الدباس</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">ج</div>
+          <div class="book-info">
+            <div class="book-title">جحيم العابرين</div>
+            <div class="book-sub">تذكر يُسرى من أجيج · المحقق نادر يظهر في نهاية شبكة العنكبوت</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">غموض</span></div>
+          </div>
+          <div class="connection conn-green">متصل بالكل</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">د</div>
+          <div class="book-info">
+            <div class="book-title">شبكة العنكبوت</div>
+            <div class="book-sub">المحقق <strong>نادر</strong> يُختم به الكتاب — شخصية جسرية تظهر لاحقاً في "النداء" و"الانتهازي" و"هذا ما حدث معها"</div>
+            <div class="book-tags"><span class="tag">غموض</span><span class="tag">تحقيق</span></div>
+          </div>
+          <div class="connection conn-blue">🕵️ نادر</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">هـ</div>
+          <div class="book-info">
+            <div class="book-title">سعد الدباس</div>
+            <div class="book-sub">قصة الخروف مشتركة مع أرض القرابين</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">غموض</span></div>
+          </div>
+          <div class="connection conn-green">يتصل بـ أرض القرابين</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── الخماسية الجديدة ── -->
+  <div class="series-block s-purple" id="block-new5">
+    <div class="series-header" onclick="toggle('block-new5')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">الخماسية الجديدة</div>
+        <div class="series-tag">٥ كتب قصيرة · بأي ترتيب · نفس العالم</div>
+        <div class="series-pills">
+          <span class="pill">✅ بأي ترتيب</span>
+          <span class="pill">📖 كتب قصيرة</span>
+          <span class="pill">أحدث إصدار</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note free">
+        <span>🟢</span>
+        <span><strong>اقرأها بأي ترتيب.</strong> نفس فكرة الخماسية القديمة — قصص مستقلة لكنها في نفس الكون. يُنصح بأن تكون قد قرأت الخماسية القديمة قبلها لتستمتع أكثر بالروابط، لكنه ليس إلزامياً.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">١</div>
+          <div class="book-info">
+            <div class="book-title">ليلة ماطرة</div>
+            <div class="book-sub">⚠️ <strong>مرتبطة بـ "هذا ما حدث معها"</strong> — هي امتداد لأحداثها من منظور هاجر. يُنصح بقراءتها أولاً.</div>
+            <div class="book-tags"><span class="tag">غموض</span><span class="tag">درامي</span></div>
+          </div>
+          <div class="connection conn-gold">🔗 مع هذا ما حدث معها</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٢</div>
+          <div class="book-info">
+            <div class="book-title">النداء</div>
+            <div class="book-sub">شخصية <strong>نادر</strong> تظهر هنا — استمرار لخيوط "شبكة العنكبوت"</div>
+            <div class="book-tags"><span class="tag">غموض</span><span class="tag">رعب</span></div>
+          </div>
+          <div class="connection conn-blue">🕵️ نادر</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٣</div>
+          <div class="book-info">
+            <div class="book-title">الغيهب</div>
+            <div class="book-sub">الغيهب — الظلام العميق</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">فانتازيا</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٤</div>
+          <div class="book-info">
+            <div class="book-title">الوليمة</div>
+            <div class="book-sub">وليمة تتحول إلى كابوس</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">غموض</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">٥</div>
+          <div class="book-info">
+            <div class="book-title">الانتهازي</div>
+            <div class="book-sub">الجزء الخامس والأخير من الخماسية الجديدة — شخصية <strong>نادر</strong> تظهر أيضاً</div>
+            <div class="book-tags"><span class="tag">غموض</span><span class="tag">إثارة</span></div>
+          </div>
+          <div class="connection conn-blue">🕵️ نادر</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── صخب الخسيف ── -->
+  <div class="series-block s-white" id="block-sakhb">
+    <div class="series-header" onclick="toggle('block-sakhb')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">صخب الخسيف</div>
+        <div class="series-tag">٣ أجزاء · <strong>مجموعة قصصية</strong> (قصص قصيرة) · بأي ترتيب</div>
+        <div class="series-pills">
+          <span class="pill">✅ بأي ترتيب</span>
+          <span class="pill">📝 قصص قصيرة</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note caution">
+        <span>📝</span>
+        <span><strong>تنبيه:</strong> "صخب الخسيف" ليست رواية واحدة طويلة، بل <strong>مجموعة قصصية</strong> (قصص قصيرة) داخل كل جزء. لا تنتظر قصة واحدة ممتدة. بعض القرّاء لاحظوا رابطاً خفيفاً جداً بين إحدى قصصها ("قرقعة") ورواية "سعد الدباس".</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row"><div class="book-num">١</div><div class="book-info"><div class="book-title">صخب الخسيف</div><div class="book-sub">2016 · الجزء الأول — مجموعة قصصية</div></div></div>
+        <div class="book-row"><div class="book-num">٢</div><div class="book-info"><div class="book-title">صخب الخسيف ٢</div><div class="book-sub">2017 · مجموعة قصصية</div></div></div>
+        <div class="book-row"><div class="book-num">٣</div><div class="book-info"><div class="book-title">صخب الخسيف ٣</div><div class="book-sub">2019 · مجموعة قصصية</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── وهج البنفسج ── -->
+  <div class="series-block s-white" id="block-wahaj">
+    <div class="series-header" onclick="toggle('block-wahaj')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">وهج البنفسج</div>
+        <div class="series-tag">جزآن · فانتازيا · يُقرأ بالترتيب</div>
+        <div class="series-pills">
+          <span class="pill">يُقرأ بالترتيب</span>
+          <span class="pill">🌸 فانتازيا</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="reading-note ordered">
+        <span>🔴</span>
+        <span><strong>يُقرأ بالترتيب.</strong> سلسلة فانتازيا مكونة من جزأين.</span>
+      </div>
+      <div class="books-list">
+        <div class="book-row"><div class="book-num">١</div><div class="book-info"><div class="book-title">وهج البنفسج</div><div class="book-sub">الجزء الأول · 2017</div></div></div>
+        <div class="book-row"><div class="book-num">٢</div><div class="book-info"><div class="book-title">وهج البنفسج ٢</div><div class="book-sub">الجزء الثاني</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── أخرى ── -->
+  <div class="series-block s-white" id="block-other">
+    <div class="series-header" onclick="toggle('block-other')">
+      <div class="series-stripe"></div>
+      <div class="series-meta">
+        <div class="series-name">روايات وأعمال مستقلة</div>
+        <div class="series-tag">مخطوطات مدفونة · هذا ما حدث معي · هذا ما حدث معها · مجرة الرعب</div>
+        <div class="series-pills">
+          <span class="pill">متنوعة</span>
+        </div>
+      </div>
+      <div class="series-chevron">▼</div>
+    </div>
+    <div class="series-body">
+      <div class="books-list">
+        <div class="book-row">
+          <div class="book-num">◆</div>
+          <div class="book-info">
+            <div class="book-title">مخطوطات مدفونة</div>
+            <div class="book-sub">رواية مشتركة مع الكاتب الكويتي عبدالوهاب الرفاعي · 2017</div>
+            <div class="book-tags"><span class="tag">مشتركة</span></div>
+          </div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">◆</div>
+          <div class="book-info">
+            <div class="book-title">هذا ما حدث معي</div>
+            <div class="book-sub">رواية مستقلة — تظهر فيها شخصية <strong>نادر</strong></div>
+            <div class="book-tags"><span class="tag">مستقلة</span></div>
+          </div>
+          <div class="connection conn-blue">🕵️ نادر</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">◆</div>
+          <div class="book-info">
+            <div class="book-title">هذا ما حدث معها</div>
+            <div class="book-sub">رواية · 2025 · <strong>⚠️ ليست مستقلة تماماً</strong> — هي امتداد لأحداث "ليلة ماطرة" من منظور هاجر. تظهر فيها شخصية <strong>نادر</strong>. يُنصح بقراءة "ليلة ماطرة" أولاً.</div>
+            <div class="book-tags"><span class="tag">مستقلة (امتداد)</span><span class="tag">أحدث إصدار</span></div>
+          </div>
+          <div class="connection conn-gold">🔗 مع ليلة ماطرة</div>
+          <div class="connection conn-blue">🕵️ نادر</div>
+        </div>
+        <div class="book-row">
+          <div class="book-num">◆</div>
+          <div class="book-info">
+            <div class="book-title">مجرة الرعب</div>
+            <div class="book-sub">عمل مستقل</div>
+            <div class="book-tags"><span class="tag">رعب</span><span class="tag">مستقل</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════ TRACKER ═══════════════════════════════ -->
+<div class="tracker">
+  <div class="tracker-title"><span class="dot" style="background:var(--blue)"></span> تتبع قراءتك</div>
+  <p class="tracker-desc">اضغط على الكتاب لتعليمه كمقروء — يتذكر اختياراتك</p>
+
+  <div class="progress-label">
+    <span id="prog-text">٠ من ٣٤ كتاباً</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
+  </div>
+
+  <div class="tracker-grid" id="trackerGrid"></div>
+</div>
+
+<footer>دليل قراءة عالم أسامة المسلم · معلومات مجمعة من Goodreads، ويكيبيديا، وآراء القراء</footer>
+
+<script>
+// ── toggle series blocks ──
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ── tracker data ── (تم تحديثه ليشمل جميع الكتب الـ 34)
+const BOOKS = [
+  // ثلاثية خوف (3)
+  { id:'khawf1', title:'خوف', series:'ثلاثية خوف' },
+  { id:'khawf2', title:'خوف ٢', series:'ثلاثية خوف' },
+  { id:'khawf3', title:'خوف ٣', series:'ثلاثية خوف' },
+  // بساتين عربستان (6)
+  { id:'basa1', title:'بساتين عربستان', series:'بساتين عربستان' },
+  { id:'basa2', title:'عصبة الشياطين', series:'بساتين عربستان' },
+  { id:'basa3', title:'ريح هاجر', series:'بساتين عربستان' },
+  { id:'basa4', title:'العرجاء', series:'بساتين عربستان' },
+  { id:'basa5', title:'الساحرة الهجينة', series:'بساتين عربستان' },
+  { id:'basa6', title:'عرين الأسد', series:'بساتين عربستان' },
+  // الدوائر الخمس (1)
+  { id:'dawaer', title:'الدوائر الخمس', series:'بساتين (توسعة)' },
+  // ملحمة البحور (5)
+  { id:'luj1', title:'لج', series:'ملحمة البحور' },
+  { id:'luj2', title:'ملكة الغرانيق', series:'ملحمة البحور' },
+  { id:'luj3', title:'ثورة الحور', series:'ملحمة البحور' },
+  { id:'luj4', title:'صراع الملكات', series:'ملحمة البحور' },
+  { id:'luj5', title:'فجر السايرينات', series:'ملحمة البحور' },
+  // الخماسية القديمة (5)
+  { id:'old1', title:'أجيج', series:'الخماسية القديمة' },
+  { id:'old2', title:'أرض القرابين', series:'الخماسية القديمة' },
+  { id:'old3', title:'جحيم العابرين', series:'الخماسية القديمة' },
+  { id:'old4', title:'شبكة العنكبوت', series:'الخماسية القديمة' },
+  { id:'old5', title:'سعد الدباس', series:'الخماسية القديمة' },
+  // الخماسية الجديدة (5)
+  { id:'new1', title:'ليلة ماطرة', series:'الخماسية الجديدة' },
+  { id:'new2', title:'النداء', series:'الخماسية الجديدة' },
+  { id:'new3', title:'الغيهب', series:'الخماسية الجديدة' },
+  { id:'new4', title:'الوليمة', series:'الخماسية الجديدة' },
+  { id:'new5', title:'الانتهازي', series:'الخماسية الجديدة' },
+  // صخب الخسيف (3)
+  { id:'sakhb1', title:'صخب الخسيف ١', series:'صخب الخسيف' },
+  { id:'sakhb2', title:'صخب الخسيف ٢', series:'صخب الخسيف' },
+  { id:'sakhb3', title:'صخب الخسيف ٣', series:'صخب الخسيف' },
+  // وهج البنفسج (2)
+  { id:'wahaj1', title:'وهج البنفسج ١', series:'وهج البنفسج' },
+  { id:'wahaj2', title:'وهج البنفسج ٢', series:'وهج البنفسج' },
+  // أخرى (4)
+  { id:'makhs', title:'مخطوطات مدفونة', series:'أخرى' },
+  { id:'hatha1', title:'هذا ما حدث معي', series:'أخرى' },
+  { id:'hatha2', title:'هذا ما حدث معها', series:'أخرى' },
+  { id:'majara', title:'مجرة الرعب', series:'أخرى' },
+];
+
+const TOTAL = BOOKS.length;
+let state = JSON.parse(localStorage.getItem('osama_progress') || '{}');
+
+function saveState() {
+  try { localStorage.setItem('osama_progress', JSON.stringify(state)); } catch(e){}
+}
+
+function updateProgress() {
+  const done = BOOKS.filter(b => state[b.id]).length;
+  const pct  = Math.round(done / TOTAL * 100);
+  document.getElementById('prog-text').textContent = `${toArabicNum(done)} من ${toArabicNum(TOTAL)} كتاباً`;
+  document.getElementById('prog-pct').textContent  = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+function toArabicNum(n) {
+  return n.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
+function toggleBook(id) {
+  state[id] = !state[id];
+  saveState();
+  const row = document.querySelector(`[data-id="${id}"]`);
+  row.classList.toggle('done', !!state[id]);
+  row.querySelector('.check').textContent = state[id] ? '✓' : '';
+  updateProgress();
+}
+
+function renderTracker() {
+  const grid = document.getElementById('trackerGrid');
+  grid.innerHTML = BOOKS.map(b => `
+    <div class="tracker-row ${state[b.id] ? 'done' : ''}" data-id="${b.id}" onclick="toggleBook('${b.id}')">
+      <div class="check">${state[b.id] ? '✓' : ''}</div>
+      <div class="tracker-book">${b.title}</div>
+      <div class="tracker-series">${b.series}</div>
+    </div>
+  `).join('');
+  updateProgress();
+}
+
+renderTracker();
+</script>
+</body>
+</html>
